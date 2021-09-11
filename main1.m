@@ -110,7 +110,7 @@ Fext = globalFext(dim,fdata);
 [u,R] = solveSystem(dim,KG,Fext,ur,vr,vl);
 
 % 2.7 Compute stress
-sig = stress(dim,x,Tn,mat,Tmat,Td,u);
+sigNew = stress(dim,x,Tn,mat,Tmat,Td,u);
 
 %% 3) POSTPROCESS
 
@@ -120,25 +120,25 @@ sig = stress(dim,x,Tn,mat,Tmat,Td,u);
 scale = 10;
 X = x(:,1);
 Y = x(:,2);
-Ux = scale*u(1:dim.ni:end,1);
-Uy = scale*u(2:dim.ni:end,1);
+UxNew = scale*u(1:dim.ni:end,1);
+UyNew = scale*u(2:dim.ni:end,1);
 
-figure
-hold on;
-box on;
-axis equal
-plot(X(Tn'),Y(Tn'),'--k');
-plot(X(Tn')+Ux(Tn'),Y(Tn')+Uy(Tn'),'b');
-title(sprintf('Deformation (scale = %.f)',scale))
-xlabel('x (m)'); ylabel('y (m)');
-
-figure
-hold on;
-box on;
-axis equal
-plot(X(Tn'),Y(Tn'),'--k');
-patch(X(Tn')+Ux(Tn'),Y(Tn')+Uy(Tn'),[sig';sig'],'edgecolor','interp');
-colormap('jet');
-colorbar('Ticks',[min(sig),0,max(sig)]);
-title('Stress \sigma (Pa)')
-xlabel('x (m)'); ylabel('y (m)');
+% figure
+% hold on;
+% box on;
+% axis equal
+% plot(X(Tn'),Y(Tn'),'--k');
+% plot(X(Tn')+Ux(Tn'),Y(Tn')+Uy(Tn'),'b');
+% title(sprintf('Deformation (scale = %.f)',scale))
+% xlabel('x (m)'); ylabel('y (m)');
+% 
+% figure
+% hold on;
+% box on;
+% axis equal
+% plot(X(Tn'),Y(Tn'),'--k');
+% patch(X(Tn')+Ux(Tn'),Y(Tn')+Uy(Tn'),[sig';sig'],'edgecolor','interp');
+% colormap('jet');
+% colorbar('Ticks',[min(sig),0,max(sig)]);
+% title('Stress \sigma (Pa)')
+% xlabel('x (m)'); ylabel('y (m)');
