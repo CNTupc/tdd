@@ -1,38 +1,40 @@
 %% 4) TEST
 
+load('Output.mat')
+
 sSize = length(sig);
-xSize = length(Ux);
-ySize = length(Uy);
+uSize = length(u);
+rSize = length(R);
 
 sOK = true;
 for ii=1:sSize
-    if sig(ii) ~= sigNew(ii)
+    if sig(ii) ~= stress(ii)
         sOK = false;
         break
     end
 end
 
-xOK = true;
+uOK = true;
 if sOK
-    for ii=1:xSize
-        if Ux(ii) ~= UxNew(ii)
-            xOK = false;
+    for ii=1:uSize
+        if u(ii) ~= DOFdisplacementMatrix(ii)
+            uOK = false;
             break
         end
     end
 end
 
-yOK = true;
-if (sOK && xOK)
-    for ii=1:ySize
-        if Uy(ii) ~= UyNew(ii)
-            yOK = false;
+rOK = true;
+if (sOK && uOK)
+    for ii=1:rSize
+        if R(ii) ~= DOFreactionMatrix(ii)
+            rOK = false;
             break
         end
     end
 end
 
-if(sOK && xOK && yOK)
+if(sOK && uOK && rOK)
     fprintf(1,'\nOK!\n')
 else
     fprintf(2,'\nERROR\n')    
