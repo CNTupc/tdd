@@ -30,12 +30,13 @@ classdef FEMsolver < handle
     end
     
     methods (Access = public)
-        function obj = FEMsolver(cParams)
-            obj.init(cParams);
-        end
+%         function obj = FEMsolver(cParams)
+%             obj.init(cParams);
+%         end
         
         function solve(obj)
-            obj.computeTotalDOF();
+            obj.init(cParams);
+            obj.computeMesh();
             obj.computeStiffnessMatrix();
         end
     end
@@ -60,7 +61,10 @@ classdef FEMsolver < handle
         end
         
         function computeMesh(obj)
-            nDOF = totalDOFcomputer(cParams);
+            nDOF = TotalDOFComputer(cParams);
+            nDOF.compute();
+            obj.totalDOF = nDOF.totalDOF;
+            connectivity = ConnectivityMatrixComputer(cParams);
             
             
         end

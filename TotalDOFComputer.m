@@ -1,4 +1,4 @@
-classdef totalDOFcomputer
+classdef TotalDOFComputer
     properties (Access = public)
         totalDOF
     end
@@ -9,13 +9,12 @@ classdef totalDOFcomputer
     end
     
     methods (Access = public)
-        function obj = totalDOFcomputer(cParams)
-            obj.init(cParams);
-        end
         
         function compute(obj)
+            obj.init(cParams);
             obj.computeTotalDOF();
         end
+        
     end
     
     methods (Access = private)
