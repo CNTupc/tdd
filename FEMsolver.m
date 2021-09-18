@@ -1,16 +1,83 @@
-classdef FEMsolver
+classdef FEMsolver < handle
     %FEMSOLVER code refactoring
     
-    properties
+    properties (Access = public)
+        displacement
+        stress
+    end
+    
+    properties (Access = private)
+        totalDOF
+        StiffnessMatrix
+    end
+    
+     properties (Access = private)
+        Area
+        contourConditions
+        Dimension
+        DOFconnectionMatrix
+        DOFperNode
+        forceData
+        materialAssignMatrix
+        materialMatrix
+        nNodesperBar
+        nodalConnectionMatrix
+        nodeCoordinatesMatrix
+        numberofElements
+        numberofNodes
+        rho
+        youngModulus
+    end
+    
+    methods (Access = public)
+        function obj = FEMsolver(cParams)
+            obj.init(cParams);
+        end
         
+        function solve(obj)
+            obj.computeTotalDOF();
+            obj.computeStiffnessMatrix();
+        end
+    end
+    
+    methods (Access = private)
+        function init(obj,cParams)
+            obj.Area = cParams.Area;
+            obj.contourConditions = cParams.contourConditions;
+            obj.Dimension = cParams.Dimension;
+            obj.DOFconnectionMatrix = cParams.DOFconnectionMatrix;
+            obj.DOFperNode = cParams.DOFperNode;
+            obj.forceData = cParams.forceData;
+            obj.materialAssignMatrix = cParams.materialAssignMatrix;
+            obj.materialMatrix = cParams.materialMatrix;
+            obj.nNodesperBar = cParams.nNodesperBar;
+            obj.nodalConnectionMatrix = cParams.nodalConnectionMatrix;
+            obj.nodeCoordinatesMatrix = cParams.nodeCoordinatesMatrix;
+            obj.numberofElements = cParams.numberofElements;
+            obj.numberofNodes = cParams.numberofNodes;
+            obj.rho = cParams.rho;
+            obj.youngModulus = cParams.youngModulus;
+        end
+        
+        function computeMesh(obj)
+            nDOF = totalDOFcomputer(cParams);
+            
+            
+        end
+        
+        
+        
+        function computeStiffnessMatrix(obj)
+            cParams.DOF = obj.totalDOF;
+            stiffness = StiffnessMatrixComputer(cParams);
+            %fer classe StiffnessMatrixComputer
+            stiffness.compute();
+            obj.StiffnessMatrix = stiffness.K;
+        end
     end
     
     methods (Static)
-        
-        function totalDOF = computeTotalDOF(numberNodes, nNodesinBar)
-            totalDOF = numberNodes*nNodesinBar;
-        end
-        
+            
         function DOFconnectionMatrix = assembleDOFconnection(numberElements,nNodesinBar,DOFnode,nodalConnection)
             DOFconnectionMatrix = zeros(numberElements,nNodesinBar*DOFnode);
             for ee = 1:numberElements
