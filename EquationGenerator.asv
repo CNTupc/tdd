@@ -1,0 +1,49 @@
+classdef EquationGenerator
+    properties (Access = public)
+        externalForceConditions
+    end
+    
+    properties (Access = private)
+        
+    end
+    
+    methods (Access = public)
+        
+        function compute(obj)
+            obj.init(cParams);
+            obj.allocateExternalForce();
+        end
+        
+    end
+    
+    methods (Access = private)
+        
+        function init(obj,cParams)
+            obj.forceData = cParams.forceData;
+            obj.totalDOF = cParams.totalDOF;
+        end
+        
+        function [fixedDisplacementMatrix,fixedDOF,freeDOF] = generateEquations(contour,totalDOF)
+            for ii = 1:length(contour)
+                fixedDisplacementMatrix(ii,1) = contour(ii,3);
+                fixedDOF(ii,1) = contour(ii,2);
+            end
+            kk = 1;
+            for jj = 1:totalDOF
+                isDOFfixed = false;
+                for ii = 1:length(contour)
+                    if jj == fixedDOF(ii,1)
+                        isDOFfixed = true;
+                        break
+                    end
+                end
+                if isDOFfixed == false
+                    freeDOF(kk, 1) = jj;
+                    kk = kk + 1;
+                end
+                
+            end
+        end
+        
+    end
+end

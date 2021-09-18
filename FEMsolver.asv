@@ -89,10 +89,10 @@ classdef FEMsolver < handle
             obj.externalForceConditions = force.externalForceConditions;
         end
         
-        function solveProblem(obj)
-            cParams.externalForceConditions = obj.externalForceConditions;
-             = EquationSolver(cParams);
-            
+        function solve(obj)
+            force = ExternalForceAllocator(cParams);
+            force.compute();
+            obj.externalForceConditions = force.externalForceConditions;
         end
         
     end
