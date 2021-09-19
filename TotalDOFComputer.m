@@ -7,11 +7,13 @@ classdef TotalDOFComputer
         numberofNodes
         nNodesperBar
     end
-    
+     
     methods (Access = public)
+        function obj = TotalDOFComputer(cParams)
+            obj.init(cParams);
+        end
         
         function compute(obj)
-            obj.init(cParams);
             obj.computeTotalDOF();
         end
         

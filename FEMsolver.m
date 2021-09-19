@@ -32,12 +32,11 @@ classdef FEMsolver < handle
     end
     
     methods (Access = public)
-%         function obj = FEMsolver(cParams)
-%             obj.init(cParams);
-%         end
+        function obj = FEMsolver(cParams)
+            obj.init(cParams);
+        end
         
         function solve(obj)
-            obj.init(cParams);
             obj.computeMesh();
             obj.computeStiffnessMatrix();
             obj.computeConditions();
