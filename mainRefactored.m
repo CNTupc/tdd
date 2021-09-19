@@ -8,7 +8,7 @@ FEM = FEMsolver(cParams);
 
 FEM.solve();
 
-u = FEM.displacement
+u = FEM.displacement;
 
-sigma = FEM
+sigma = FEM.stress;
 
