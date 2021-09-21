@@ -10,8 +10,11 @@ classdef ExternalForceAllocator
     
     methods (Access = public)
         
-        function compute(obj)
+        function obj = ExternalForceAllocator(cParams)
             obj.init(cParams);
+        end
+        
+        function compute(obj)
             obj.allocateExternalForce();
         end
         

@@ -17,8 +17,11 @@ classdef StressSolver
     
     methods (Access = public)
         
-        function compute(obj)
+        function obj = StressSolver(cParams)
             obj.init(cParams);
+        end
+        
+        function compute(obj)
             obj.computeStress();
         end
         

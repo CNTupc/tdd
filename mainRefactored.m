@@ -6,7 +6,7 @@ cParams = load('Input.mat');
 
 FEM = FEMsolver(cParams);
 
-FEM.solve();
+FEM.solve(cParams);
 
 u = FEM.displacement;
 

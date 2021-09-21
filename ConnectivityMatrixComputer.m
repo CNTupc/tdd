@@ -27,7 +27,7 @@ classdef ConnectivityMatrixComputer
         function init(obj,cParams)
             obj.numberofElements = cParams.numberofElements;
             obj.nNodesperBar = cParams.nNodesperBar;
-            obj.DOFperNodes = cParams.DOFperNode;
+            obj.DOFperNode = cParams.DOFperNode;
             obj.nodalConnectionMatrix = cParams.nodalConnectionMatrix;
         end
         

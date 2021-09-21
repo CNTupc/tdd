@@ -18,8 +18,11 @@ classdef EquationSolver
     
     methods (Access = public)
         
-        function compute(obj)
+        function obj = EquationSolver(cParams)
             obj.init(cParams);
+        end
+        
+        function compute(obj)
             obj.generateEquations();
             obj.solveSystem();
         end

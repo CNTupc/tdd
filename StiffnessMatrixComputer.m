@@ -18,8 +18,11 @@ classdef StiffnessMatrixComputer
     
     methods (Access = public)
         
-        function compute(obj)
+        function obj = StiffnessMatrixComputer(cParams)
             obj.init(cParams);
+        end
+        
+        function compute(obj)
             obj.assembleElementStiffnessMatrix();
             obj.assembleGlobalStiffnessMatrix();
         end
@@ -31,7 +34,7 @@ classdef StiffnessMatrixComputer
         function init(obj,cParams)
             obj.numberofElements = cParams.numberofElements;
             obj.nNodesperBar = cParams.nNodesperBar;
-            obj.DOFperNodes = cParams.DOFperNode;
+            obj.DOFperNode = cParams.DOFperNode;
             obj.nodalConnectionMatrix = cParams.nodalConnectionMatrix;
             obj.nodeCoordinatesMatrix = cParams.nodeCoordinatesMatrix;
             obj.materialMatrix = cParams.materialMatrix;

@@ -36,12 +36,12 @@ classdef FEMsolver < handle
             obj.init(cParams);
         end
         
-        function solve(obj)
-            obj.computeMesh();
-            obj.computeStiffnessMatrix();
-            obj.computeConditions();
-            obj.solveDisplacement();
-            obj.solveStress();
+        function solve(obj,cParams)
+            obj.computeMesh(cParams);
+            obj.computeStiffnessMatrix(cParams);
+            obj.computeConditions(cParams);
+            obj.solveDisplacement(cParams);
+            obj.solveStress(cParams);
         end
         
     end
@@ -66,7 +66,7 @@ classdef FEMsolver < handle
             obj.youngModulus = cParams.youngModulus;
         end
         
-        function computeMesh(obj)
+        function computeMesh(obj,cParams)
             nDOF = TotalDOFComputer(cParams);
             nDOF.compute();
             obj.totalDOF = nDOF.totalDOF;
@@ -75,7 +75,7 @@ classdef FEMsolver < handle
             obj.connectivityMatrix = connectivity.connectivityMatrix;
         end
                 
-        function computeStiffnessMatrix(obj)
+        function computeStiffnessMatrix(obj,cParams)
             cParams.totalDOF = obj.totalDOF;
             cParams.connectivityMatrix = obj.connectivityMatrix;
             stiffness = StiffnessMatrixComputer(cParams);
@@ -83,13 +83,13 @@ classdef FEMsolver < handle
             obj.stiffnessMatrix = stiffness.K;
         end
         
-        function computeConditions(obj)
+        function computeConditions(obj,cParams)
             force = ExternalForceAllocator(cParams);
             force.compute();
             obj.externalForceMatrix = force.externalForceConditions;
         end
         
-        function solveDisplacement(obj)
+        function solveDisplacement(obj,cParams)
             cParams.externalForceConditions = obj.externalForceMatrix;
             cParams.stiffnessMatrix = obj.stiffnessMatrix;
             solution = EquationSolver(cParams);
@@ -97,7 +97,7 @@ classdef FEMsolver < handle
             obj.displacement = solution.DOFdisplacementMatrix;            
         end
         
-        function solveStress(obj)
+        function solveStress(obj,cParams)
             cParams.displacement = obj.displacement;
             sigma = StressSolver(cParams);
             sigma.compute();
