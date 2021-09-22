@@ -1,4 +1,4 @@
-classdef StressSolver
+classdef StressSolver < handle
     properties (Access = public)
         sigma
     end
@@ -42,7 +42,7 @@ classdef StressSolver
         end
         
         function computeStress(obj)
-            obj.sigma = zeros(dim.nel,1);
+            obj.sigma = zeros(obj.numberofElements,1);
             noe = obj.numberofElements;
             nxm = obj.nodeCoordinatesMatrix;
             ncm = obj.nodalConnectionMatrix;

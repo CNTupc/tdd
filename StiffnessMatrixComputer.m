@@ -1,4 +1,4 @@
-classdef StiffnessMatrixComputer
+classdef StiffnessMatrixComputer < handle
     properties (Access = public)
         K
     end
@@ -40,6 +40,7 @@ classdef StiffnessMatrixComputer
             obj.materialMatrix = cParams.materialMatrix;
             obj.materialAssignMatrix = cParams.materialAssignMatrix;
             obj.connectivityMatrix = cParams.connectivityMatrix;
+            obj.totalDOF = cParams.totalDOF;
         end
         
         function assembleElementStiffnessMatrix(obj)
@@ -75,7 +76,7 @@ classdef StiffnessMatrixComputer
             for ee = 1:noe
                 for ii = 1:nnb*dn
                     I = cm(ee, ii);
-                    for jj = 1:nnv*dn
+                    for jj = 1:nnb*dn
                         J = cm(ee,jj);
                         obj.K(I,J) = obj.K(I,J) + obj.elementStiffnessMatrix(ii,jj,ee);
                     end

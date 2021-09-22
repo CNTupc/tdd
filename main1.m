@@ -110,7 +110,7 @@ Fext = globalFext(dim,fdata);
 [u,R] = solveSystem(dim,KG,Fext,ur,vr,vl);
 
 % 2.7 Compute stress
-sigNew = stress(dim,x,Tn,mat,Tmat,Td,u);
+sig = stress(dim,x,Tn,mat,Tmat,Td,u);
 
 %% 3) POSTPROCESS
 

@@ -1,4 +1,4 @@
-classdef ConnectivityMatrixComputer
+classdef ConnectivityMatrixComputer < handle
     properties (Access = public)
         connectivityMatrix
     end

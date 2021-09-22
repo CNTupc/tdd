@@ -1,4 +1,4 @@
-classdef ExternalForceAllocator
+classdef ExternalForceAllocator < handle
     properties (Access = public)
         externalForceConditions
     end

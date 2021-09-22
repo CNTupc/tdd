@@ -1,4 +1,4 @@
-classdef TotalDOFComputer
+classdef TotalDOFComputer < handle
     properties (Access = public)
         totalDOF
     end

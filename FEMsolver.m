@@ -84,12 +84,16 @@ classdef FEMsolver < handle
         end
         
         function computeConditions(obj,cParams)
+            cParams.totalDOF = obj.totalDOF;
+            cParams.connectivityMatrix = obj.connectivityMatrix;
             force = ExternalForceAllocator(cParams);
             force.compute();
             obj.externalForceMatrix = force.externalForceConditions;
         end
         
         function solveDisplacement(obj,cParams)
+            cParams.totalDOF = obj.totalDOF;
+            cParams.connectivityMatrix = obj.connectivityMatrix;
             cParams.externalForceConditions = obj.externalForceMatrix;
             cParams.stiffnessMatrix = obj.stiffnessMatrix;
             solution = EquationSolver(cParams);
@@ -98,6 +102,10 @@ classdef FEMsolver < handle
         end
         
         function solveStress(obj,cParams)
+            cParams.totalDOF = obj.totalDOF;
+            cParams.connectivityMatrix = obj.connectivityMatrix;
+            cParams.externalForceConditions = obj.externalForceMatrix;
+            cParams.stiffnessMatrix = obj.stiffnessMatrix;
             cParams.displacement = obj.displacement;
             sigma = StressSolver(cParams);
             sigma.compute();

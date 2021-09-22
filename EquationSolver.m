@@ -1,4 +1,4 @@
-classdef EquationSolver
+classdef EquationSolver < handle
     properties (Access = public)
         DOFdisplacementMatrix
         DOFreactionMatrix
@@ -34,12 +34,7 @@ classdef EquationSolver
         function init(obj,cParams)
             obj.contourConditions = cParams.contourConditions;
             obj.totalDOF = cParams.totalDOF;
-            obj.fixedDisplacementMatrix = cParams.fixedDisplacementMatrix;
-            obj.fixedDOF = cParams.fixedDOF;
-            obj.freeDOF = cParams.freeDOF;
             obj.stiffnessMatrix = cParams.stiffnessMatrix;
-            obj.noExternalForceVector = cParams.noExternalForceVector;
-            obj.externalForceVector = cParams.externalForceVector;
             obj.externalForceMatrix = cParams.externalForceConditions;
         end
         
@@ -109,13 +104,13 @@ classdef EquationSolver
             FLext = obj.noExternalForceVector;
             FRext = obj.externalForceVector;
             ul = inv(Kll)*(FLext - Krl*ur);
-            obj.DOFdisplacementMatrix = zeros(dim.ndof,1);
+            obj.DOFdisplacementMatrix = zeros(obj.totalDOF,1);
             for ii = 1:length(vl)
                 obj.DOFdisplacementMatrix(vl(ii),1) = ul(ii);
             end
             
             Rr = Krr*ur + Klr*ul - FRext;
-            obj.DOFreactionMatrix = zeros(dim.ndof,1);
+            obj.DOFreactionMatrix = zeros(obj.totalDOF,1);
             for ii = 1:length(vr)
                 obj.DOFreactionMatrix(vr(ii),1) = Rr(ii);
             end
