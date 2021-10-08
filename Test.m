@@ -79,7 +79,7 @@ classdef Test < handle
             
             obj.sOK = true;
             for ii=1:obj.sSize
-                if obj.sigmaOld(ii) ~= obj.stress(ii)
+                if obj.sigmaOld(ii) - obj.stress(ii) >= 1e-6
                     obj.sOK = false;
                     break
                 end
@@ -88,7 +88,7 @@ classdef Test < handle
             obj.uOK = true;
             if obj.sOK
                 for ii=1:obj.uSize
-                    if obj.uOld(ii) ~= obj.displacement(ii)
+                    if obj.uOld(ii) - obj.displacement(ii) >= 1e-6
                         obj.uOK = false;
                         break
                     end

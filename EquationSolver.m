@@ -103,7 +103,7 @@ classdef EquationSolver < handle
             
             FLext = obj.noExternalForceVector;
             FRext = obj.externalForceVector;
-            ul = inv(Kll)*(FLext - Krl*ur);
+            ul = (Kll)\(FLext - Krl*ur);
             obj.DOFdisplacementMatrix = zeros(obj.totalDOF,1);
             for ii = 1:length(vl)
                 obj.DOFdisplacementMatrix(vl(ii),1) = ul(ii);

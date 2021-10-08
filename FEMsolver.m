@@ -28,6 +28,7 @@ classdef FEMsolver < handle
         numberofNodes
         rho
         youngModulus
+        type
     end
     
     methods (Access = public)
