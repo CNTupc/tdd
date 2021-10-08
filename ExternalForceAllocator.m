@@ -10,8 +10,8 @@ classdef ExternalForceAllocator < handle
     
     methods (Access = public)
         
-        function obj = ExternalForceAllocator(cParams)
-            obj.init(cParams);
+        function obj = ExternalForceAllocator(s)
+            obj.init(s);
         end
         
         function compute(obj)
@@ -22,9 +22,9 @@ classdef ExternalForceAllocator < handle
     
     methods (Access = private)
         
-        function init(obj,cParams)
-            obj.forceData = cParams.forceData;
-            obj.totalDOF = cParams.totalDOF;
+        function init(obj,s)
+            obj.forceData   = s.forceData;
+            obj.totalDOF    = s.totalDOF;
         end
         
         function allocateExternalForce(obj)

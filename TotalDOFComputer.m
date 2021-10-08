@@ -9,8 +9,8 @@ classdef TotalDOFComputer < handle
     end
      
     methods (Access = public)
-        function obj = TotalDOFComputer(cParams)
-            obj.init(cParams);
+        function obj = TotalDOFComputer(s)
+            obj.init(s);
         end
         
         function compute(obj)
@@ -21,9 +21,9 @@ classdef TotalDOFComputer < handle
     
     methods (Access = private)
         
-        function init(obj,cParams)
-            obj.numberofNodes = cParams.numberofNodes;
-            obj.nNodesperBar = cParams.nNodesperBar;
+        function init(obj,s)
+            obj.numberofNodes   = s.numberofNodes;
+            obj.nNodesperBar    = s.nNodesperBar;
         end
         
         function computeTotalDOF(obj)

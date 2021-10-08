@@ -18,8 +18,8 @@ classdef EquationSolver < handle
     
     methods (Access = public)
         
-        function obj = EquationSolver(cParams)
-            obj.init(cParams);
+        function obj = EquationSolver(s)
+            obj.init(s);
         end
         
         function compute(obj)
@@ -31,11 +31,11 @@ classdef EquationSolver < handle
     
     methods (Access = private)
         
-        function init(obj,cParams)
-            obj.contourConditions = cParams.contourConditions;
-            obj.totalDOF = cParams.totalDOF;
-            obj.stiffnessMatrix = cParams.stiffnessMatrix;
-            obj.externalForceMatrix = cParams.externalForceConditions;
+        function init(obj,s)
+            obj.contourConditions   = s.contourConditions;
+            obj.totalDOF            = s.totalDOF;
+            obj.stiffnessMatrix     = s.K;
+            obj.externalForceMatrix = s.F;
         end
         
         function generateEquations(obj)

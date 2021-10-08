@@ -3,9 +3,11 @@ close all
 
 cParams = load('Input.mat');
 
-FEM = FEMsolver(cParams);
+s = cParams;
 
-FEM.solve(cParams);
+FEM = FEMsolver(cParams,s);
+
+FEM.solve(s);
 
 u = FEM.displacement;
 

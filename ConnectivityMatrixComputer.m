@@ -12,8 +12,8 @@ classdef ConnectivityMatrixComputer < handle
     
     methods (Access = public)
         
-        function obj = ConnectivityMatrixComputer(cParams)
-            obj.init(cParams);
+        function obj = ConnectivityMatrixComputer(s)
+            obj.init(s);
         end
         
         function compute(obj)
@@ -24,11 +24,11 @@ classdef ConnectivityMatrixComputer < handle
     
     methods (Access = private)
         
-        function init(obj,cParams)
-            obj.numberofElements = cParams.numberofElements;
-            obj.nNodesperBar = cParams.nNodesperBar;
-            obj.DOFperNode = cParams.DOFperNode;
-            obj.nodalConnectionMatrix = cParams.nodalConnectionMatrix;
+        function init(obj,s)
+            obj.numberofElements        = s.numberofElements;
+            obj.nNodesperBar            = s.nNodesperBar;
+            obj.DOFperNode              = s.DOFperNode;
+            obj.nodalConnectionMatrix   = s.nodalConnectionMatrix;
         end
         
         function assembleConnectivityMatrix(obj)
